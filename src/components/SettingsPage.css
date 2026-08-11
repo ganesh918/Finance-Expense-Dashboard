@@ -1,0 +1,338 @@
+.settings-page {
+  max-width: 780px;
+}
+
+/* ===== Hero ===== */
+.settings-hero {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  background: linear-gradient(135deg, var(--pine) 0%, var(--pine-light) 100%);
+  border-radius: var(--radius-lg);
+  padding: 24px 26px;
+  color: #F3EFE2;
+  box-shadow: var(--shadow);
+  margin-bottom: 18px;
+}
+
+.settings-hero__avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  background: var(--brass);
+  color: var(--pine);
+  display: grid;
+  place-items: center;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.settings-hero__body { flex: 1; min-width: 0; }
+
+.settings-hero__name {
+  font-size: 1.25rem;
+  color: #FBF8F0;
+}
+
+.settings-hero__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 8px;
+  font-size: 0.78rem;
+  color: #D7E4DB;
+}
+.settings-hero__meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.settings-hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(251, 248, 240, 0.12);
+  border: 1px solid rgba(251, 248, 240, 0.2);
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: #C9F2D9;
+  flex-shrink: 0;
+}
+
+/* ===== Jump rail ===== */
+.settings-jumprail {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  margin-bottom: 18px;
+  scrollbar-width: none;
+}
+.settings-jumprail::-webkit-scrollbar { display: none; }
+
+.settings-jumprail__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  background: var(--paper-raised);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 7px 14px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--ink-soft);
+  flex-shrink: 0;
+}
+.settings-jumprail__item:hover {
+  border-color: var(--pine);
+  color: var(--pine);
+}
+
+.settings-body {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.settings-section {
+  padding: 22px;
+  scroll-margin-top: 16px;
+}
+
+.settings-section__head {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.settings-section__icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--pine-tint);
+  color: var(--pine);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.settings-section__icon--danger {
+  background: var(--coral-tint);
+  color: var(--coral);
+}
+
+.settings-section__desc {
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  margin-top: 2px;
+}
+
+.settings-section--danger {
+  border-color: var(--coral-tint);
+}
+
+.settings-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+}
+.settings-row:last-child { border-bottom: none; padding-bottom: 0; }
+
+.settings-row__label {
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.settings-row__desc {
+  font-size: 0.78rem;
+  color: var(--ink-faint);
+  margin-top: 2px;
+}
+
+.entry-form__actions--start {
+  justify-content: flex-start;
+}
+
+/* ===== Password strength meter ===== */
+.password-strength {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: -4px;
+}
+
+.password-strength__bars {
+  display: flex;
+  gap: 4px;
+  flex: 1;
+  max-width: 160px;
+}
+
+.password-strength__bar {
+  height: 4px;
+  flex: 1;
+  border-radius: 999px;
+  transition: background 0.15s ease;
+}
+
+.password-strength__label {
+  font-size: 0.74rem;
+  font-weight: 600;
+}
+
+/* ===== Theme picker ===== */
+.theme-picker {
+  display: flex;
+  gap: 10px;
+}
+
+.theme-swatch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 8px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+.theme-swatch--active {
+  border-color: var(--pine);
+  color: var(--pine);
+}
+
+.theme-swatch__preview {
+  width: 52px;
+  height: 34px;
+  border-radius: 6px;
+  border: 1px solid var(--line-strong);
+}
+.theme-swatch__preview--light {
+  background: linear-gradient(135deg, #F6F4EC 60%, #FFFFFF 100%);
+}
+.theme-swatch__preview--dark {
+  background: linear-gradient(135deg, #101813 60%, #182219 100%);
+}
+
+/* ===== Budget edit rows ===== */
+.budget-edit-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.budget-edit-row {
+  display: grid;
+  grid-template-columns: 10px 1fr 130px auto;
+  align-items: center;
+  gap: 12px;
+}
+
+.budget-edit-row__dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+
+.budget-edit-row__name {
+  font-size: 0.86rem;
+  font-weight: 500;
+}
+
+.budget-edit-row__save {
+  padding: 8px 12px;
+  font-size: 0.78rem;
+}
+
+/* ===== Data / danger action rows ===== */
+.settings-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.settings-actions__danger {
+  color: var(--coral);
+  border-color: var(--coral-tint);
+}
+.settings-actions__danger:hover {
+  background: var(--coral-tint);
+}
+
+.btn--danger {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--coral);
+  color: #FBF8F0;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 10px 16px;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+.btn--danger:hover { opacity: 0.9; }
+
+/* ===== Toggle switch ===== */
+.toggle-switch {
+  width: 42px;
+  height: 24px;
+  border-radius: 999px;
+  background: var(--line-strong);
+  border: none;
+  position: relative;
+  flex-shrink: 0;
+  transition: background 0.15s ease;
+}
+.toggle-switch--on {
+  background: var(--pine);
+}
+.toggle-switch__thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  transition: transform 0.15s ease;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+.toggle-switch--on .toggle-switch__thumb {
+  transform: translateX(18px);
+}
+
+@media (max-width: 640px) {
+  .settings-hero { flex-wrap: wrap; }
+  .settings-hero__badge { order: 3; }
+  .budget-edit-row {
+    grid-template-columns: 10px 1fr auto;
+    row-gap: 8px;
+  }
+  .budget-edit-row__save {
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+  .settings-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .settings-row > select,
+  .settings-row > .theme-picker {
+    align-self: stretch;
+  }
+}
