@@ -50,16 +50,28 @@ export function AuthProvider({ children }) {
     }
   }, []);
 
-  const login = ({ email, password }) => {
+ const login = ({ email, password }) => {
+    const cleanEmail = email.trim().toLowerCase();
     const users = getUsers();
-    const match = users.find(
-      (u) => u.email.toLowerCase() === email.trim().toLowerCase() && u.password === password
-    );
-    if (!match) {
-      return { ok: false, error: "Email or password is incorrect." };
+    const existing = users.find((u) => u.email.toLowerCase() === cleanEmail);
+
+    // If the email is already registered, the password must match it.
+    if (existing) {
+      if (existing.password !== password) {
+        return { ok: false, error: "Email or password is incorrect." };
+      }
+      localStorage.setItem(SESSION_KEY, existing.email);
+      setUser({ id: existing.id, name: existing.name, email: existing.email });
+      return { ok: true };
     }
-    localStorage.setItem(SESSION_KEY, match.email);
-    setUser({ id: match.id, name: match.name, email: match.email });
+
+    // Unrecognized email — auto-create an account so login works without a
+    // separate signup step. Demo-only behavior; a real app would never do this.
+    const derivedName = cleanEmail.split("@")[0].replace(/[._-]+/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+    const newUser = { id: `u_${Date.now()}`, name: derivedName || "Member", email: email.trim(), password };
+    saveUsers([...users, newUser]);
+    localStorage.setItem(SESSION_KEY, newUser.email);
+    setUser({ id: newUser.id, name: newUser.name, email: newUser.email });
     return { ok: true };
   };
 
