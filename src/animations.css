@@ -1,22 +1,22 @@
-/* ---------- Keyframes ---------- */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
 
 @keyframes fadeSlideUp {
-  from { opacity: 0; transform: translateY(10px); }
+  from { opacity: 0; transform: translateY(14px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes scaleIn {
-  from { opacity: 0; transform: scale(0.96); }
+  from { opacity: 0; transform: scale(0.94); }
   to { opacity: 1; transform: scale(1); }
 }
 
 @keyframes slideInLeft {
   from { opacity: 0; transform: translateX(-12px); }
   to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 @keyframes drawBar {
@@ -29,102 +29,48 @@
   100% { box-shadow: 0 0 0 8px rgba(184, 134, 11, 0); }
 }
 
+@keyframes floatIcon {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
 
 /* ---------- Page-level entrance ---------- */
 .app-content > * {
-  animation: fadeSlideUp 0.35s ease both;
+  animation: fadeSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-/* Stagger cards/sections within a page for a nicer cascade */
-.overview > *:nth-child(1) { animation-delay: 0s; }
-.overview > *:nth-child(2) { animation-delay: 0.04s; }
-.overview > *:nth-child(3) { animation-delay: 0.08s; }
-.overview > *:nth-child(4) { animation-delay: 0.12s; }
-.overview > *:nth-child(5) { animation-delay: 0.16s; }
-.overview > *:nth-child(6) { animation-delay: 0.2s; }
-
-.settings-body > * {
-  animation: fadeSlideUp 0.3s ease both;
-}
-.settings-body > *:nth-child(1) { animation-delay: 0.02s; }
-.settings-body > *:nth-child(2) { animation-delay: 0.06s; }
+.overview > *:nth-child(1),
+.budgets-page > *:nth-child(1),
+.settings-body > *:nth-child(1) { animation-delay: 0s; }
+.overview > *:nth-child(2),
+.budgets-page > *:nth-child(2),
+.settings-body > *:nth-child(2) { animation-delay: 0.05s; }
+.overview > *:nth-child(3),
+.budgets-page > *:nth-child(3),
 .settings-body > *:nth-child(3) { animation-delay: 0.1s; }
-.settings-body > *:nth-child(4) { animation-delay: 0.14s; }
-.settings-body > *:nth-child(5) { animation-delay: 0.18s; }
-.settings-body > *:nth-child(6) { animation-delay: 0.22s; }
-.settings-body > *:nth-child(7) { animation-delay: 0.26s; }
+.overview > *:nth-child(4),
+.budgets-page > *:nth-child(4),
+.settings-body > *:nth-child(4) { animation-delay: 0.15s; }
+.overview > *:nth-child(5),
+.budgets-page > *:nth-child(5),
+.settings-body > *:nth-child(5) { animation-delay: 0.2s; }
+.overview > *:nth-child(6),
+.settings-body > *:nth-child(6) { animation-delay: 0.25s; }
+.overview > *:nth-child(7),
+.settings-body > *:nth-child(7) { animation-delay: 0.3s; }
 
-/* ---------- Cards & summary tiles ---------- */
+/* ---------- Cards & tiles ---------- */
 .card,
 .summary-card,
 .quickstat,
 .watchlist-item,
-.budget-item--rich {
-  animation: fadeSlideUp 0.3s ease both;
-}
-
-.card:hover,
-.summary-card:hover,
-.quickstat:hover,
-.budget-item--rich:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(22, 36, 28, 0.06), 0 14px 28px rgba(22, 36, 28, 0.09);
-}
-.card,
-.summary-card,
-.quickstat,
-.budget-item--rich {
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-}
-
-/* ---------- Buttons ---------- */
-.btn,
-.topbar__theme-toggle,
-.sidebar__link,
-.segmented__btn,
-.card__link {
-  transition: transform 0.12s ease, background 0.15s ease, color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
-}
-
-.btn--primary:active,
-.btn--ghost:active,
-.btn--danger:active {
-  transform: scale(0.97);
-}
-
-.btn--primary:hover {
-  box-shadow: 0 4px 14px rgba(27, 67, 50, 0.25);
-}
-
-/* ---------- Row action icon buttons ---------- */
-.row-actions button,
-.recent-item__actions button {
-  transition: transform 0.12s ease, background 0.15s ease, color 0.15s ease;
-}
-.row-actions button:hover,
-.recent-item__actions button:hover {
-  transform: translateY(-1px);
-}
-
-/* ---------- Sidebar links ---------- */
-.sidebar__link {
-  position: relative;
-  overflow: hidden;
-}
-.sidebar__link--active {
-  animation: scaleIn 0.2s ease;
-}
-
-/* ---------- Table rows ---------- */
-.table tbody tr {
-  animation: fadeIn 0.25s ease both;
-  transition: background 0.15s ease;
-}
-.table tbody tr:hover {
-  background: var(--paper);
+.budget-item--rich,
+.settings-section {
+  animation: fadeSlideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 /* ---------- Modal ---------- */
@@ -132,29 +78,31 @@
   animation: fadeIn 0.18s ease;
 }
 .modal {
-  animation: scaleIn 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: scaleIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* ---------- Toasts already animate via toast-in in Toast.css;
-   add a matching exit-friendly easing tweak ---------- */
+/* ---------- Toast ---------- */
 .toast {
   animation: fadeSlideUp 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* ---------- Auth page ---------- */
+/* ---------- Auth card ---------- */
 .auth-card {
   animation: scaleIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* ---------- Budget bars fill ---------- */
+/* ---------- Progress / budget bars fill in from zero ---------- */
 .budget-bar__fill {
   transform-origin: left;
-  animation: drawBar 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: drawBar 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-/* ---------- Toggle switch thumb already transitions; add a soft press ---------- */
-.toggle-switch:active .toggle-switch__thumb {
-  width: 21px;
+/* ---------- Sidebar active link pop ---------- */
+.sidebar__link--active {
+  animation: scaleIn 0.2s ease;
+}
+.sidebar__scrim {
+  animation: fadeIn 0.2s ease;
 }
 
 /* ---------- Theme toggle icon swap ---------- */
@@ -162,21 +110,31 @@
   animation: scaleIn 0.2s ease;
 }
 
-/* ---------- Sidebar drawer (mobile) already has a transform transition;
-   add scrim fade ---------- */
-.sidebar__scrim {
-  animation: fadeIn 0.2s ease;
+/* ---------- Table rows cascade in ---------- */
+.table tbody tr {
+  animation: fadeIn 0.25s ease both;
 }
 
-/* ---------- Bottom nav active tab ---------- */
-.bottom-nav__item svg {
-  transition: color 0.15s ease, transform 0.15s ease;
+/* ---------- Source / watchlist rows slide in ---------- */
+.source-item {
+  animation: slideInLeft 0.3s ease both;
 }
-.bottom-nav__item--active svg {
-  transform: translateY(-1px);
+.source-item:nth-child(1) { animation-delay: 0s; }
+.source-item:nth-child(2) { animation-delay: 0.05s; }
+.source-item:nth-child(3) { animation-delay: 0.1s; }
+.source-item:nth-child(4) { animation-delay: 0.15s; }
+
+.watchlist-item:nth-child(1) { animation-delay: 0s; }
+.watchlist-item:nth-child(2) { animation-delay: 0.05s; }
+.watchlist-item:nth-child(3) { animation-delay: 0.1s; }
+
+/* ---------- Hero spotlight icons float gently ---------- */
+.overview-hero__spotlight-icon,
+.income-hero__spotlight-icon {
+  animation: floatIcon 3s ease-in-out infinite;
 }
 
-/* ---------- Loading spinner for app-loading state ---------- */
+/* ---------- Loading spinner ---------- */
 .app-loading::before {
   content: "";
   width: 22px;
@@ -187,26 +145,17 @@
   animation: spin 0.7s linear infinite;
   margin-right: 10px;
 }
-.app-loading {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
-/* ---------- Badge pulse on "Over budget" ---------- */
+/* ---------- Over-budget badge pulses ---------- */
 .badge--coral {
   animation: pulseRing 1.8s ease-out infinite;
 }
 
-/* ---------- Watchlist / source items stagger slightly ---------- */
-.watchlist-item:nth-child(1) { animation-delay: 0s; }
-.watchlist-item:nth-child(2) { animation-delay: 0.05s; }
-.watchlist-item:nth-child(3) { animation-delay: 0.1s; }
-
-.source-item {
-  animation: slideInLeft 0.3s ease both;
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
-.source-item:nth-child(1) { animation-delay: 0s; }
-.source-item:nth-child(2) { animation-delay: 0.05s; }
-.source-item:nth-child(3) { animation-delay: 0.1s; }
-.source-item:nth-child(4) { animation-delay: 0.15s; }

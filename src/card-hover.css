@@ -1,145 +1,535 @@
-/* ---------- Base card lift (main .card, chart cards, settings sections) ---------- */
+
+
+/* =========================================================
+   CARD HOVER & MICRO-INTERACTION SYSTEM
+   ========================================================= */
+
+/* ---------- Base card lift ---------- */
+
 .card,
 .settings-section,
 .watchlist-card {
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.2s ease,
-              border-color 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.28s ease,
+    border-color 0.28s ease,
+    background 0.28s ease;
+  will-change: transform;
 }
+
+.card::before,
+.settings-section::before,
+.watchlist-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 80%;
+  height: 100%;
+  background: linear-gradient(
+    100deg,
+    transparent,
+    rgba(255, 255, 255, 0.08),
+    transparent
+  );
+  transform: skewX(-18deg);
+  transition: left 0.65s ease;
+  pointer-events: none;
+}
+
 .card:hover,
-.settings-section:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 16px rgba(22, 36, 28, 0.07), 0 18px 34px rgba(22, 36, 28, 0.1);
+.settings-section:hover,
+.watchlist-card:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 8px 18px rgba(22, 36, 28, 0.08),
+    0 20px 40px rgba(22, 36, 28, 0.11);
   border-color: var(--line-strong);
 }
 
-/* ---------- Summary cards (Overview / Income / Expenses stat tiles) ---------- */
-.summary-card {
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.2s ease,
-              border-left-width 0.15s ease;
-  cursor: default;
+.card:hover::before,
+.settings-section:hover::before,
+.watchlist-card:hover::before {
+  left: 130%;
 }
+
+
+/* =========================================================
+   SUMMARY CARDS
+   ========================================================= */
+
+.summary-card {
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.3s ease,
+    border-left-width 0.2s ease;
+  cursor: default;
+  will-change: transform;
+}
+
+.summary-card::after {
+  content: "";
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  right: -35px;
+  bottom: -40px;
+  border-radius: 50%;
+  background: var(--brass-tint);
+  opacity: 0;
+  transform: scale(0.5);
+  transition:
+    transform 0.35s ease,
+    opacity 0.35s ease;
+  pointer-events: none;
+}
+
 .summary-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 18px rgba(22, 36, 28, 0.08), 0 20px 36px rgba(22, 36, 28, 0.1);
+  transform: translateY(-6px) scale(1.01);
+  box-shadow:
+    0 10px 22px rgba(22, 36, 28, 0.09),
+    0 24px 42px rgba(22, 36, 28, 0.12);
   border-left-width: 6px;
 }
-.summary-card:hover .summary-card__icon {
-  transform: scale(1.1);
-}
-.summary-card__icon {
-  transition: transform 0.2s ease;
+
+.summary-card:hover::after {
+  opacity: 0.7;
+  transform: scale(1.4);
 }
 
-/* ---------- Quick stat chips ---------- */
+.summary-card__icon {
+  transition:
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.3s ease;
+  will-change: transform;
+}
+
+.summary-card:hover .summary-card__icon {
+  transform: scale(1.12) rotate(-5deg);
+}
+
+
+/* =========================================================
+   QUICK STAT CHIPS
+   ========================================================= */
+
 .quickstat {
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, border-color 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.28s ease,
+    border-color 0.28s ease;
   cursor: default;
 }
+
+.quickstat::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent 25%,
+    rgba(255, 255, 255, 0.09) 50%,
+    transparent 75%
+  );
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+  pointer-events: none;
+}
+
 .quickstat:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 16px rgba(22, 36, 28, 0.07), 0 16px 28px rgba(22, 36, 28, 0.09);
+  transform: translateY(-5px);
+  box-shadow:
+    0 8px 18px rgba(22, 36, 28, 0.08),
+    0 18px 32px rgba(22, 36, 28, 0.1);
   border-color: var(--brass);
 }
-.quickstat:hover .quickstat__icon {
-  transform: scale(1.1) rotate(-4deg);
-}
-.quickstat__icon {
-  transition: transform 0.2s ease;
+
+.quickstat:hover::before {
+  transform: translateX(100%);
 }
 
-/* ---------- Rich budget cards ---------- */
+.quickstat__icon {
+  transition:
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.3s ease;
+}
+
+.quickstat:hover .quickstat__icon {
+  transform: scale(1.12) rotate(-6deg);
+}
+
+
+/* =========================================================
+   RICH BUDGET CARDS
+   ========================================================= */
+
 .budget-item--rich {
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, border-color 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.28s ease,
+    border-color 0.28s ease;
   cursor: default;
 }
+
+.budget-item--rich::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    110deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.07),
+    transparent 80%
+  );
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+  pointer-events: none;
+}
+
 .budget-item--rich:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 16px rgba(22, 36, 28, 0.08), 0 16px 30px rgba(22, 36, 28, 0.1);
+  transform: translateY(-5px);
+  box-shadow:
+    0 8px 18px rgba(22, 36, 28, 0.08),
+    0 18px 34px rgba(22, 36, 28, 0.11);
   border-color: var(--line-strong);
 }
-.budget-item--rich:hover .budget-item__swatch {
-  transform: scale(1.4);
-}
-.budget-item__swatch {
-  transition: transform 0.15s ease;
+
+.budget-item--rich:hover::before {
+  transform: translateX(100%);
 }
 
-/* ---------- Watchlist items ---------- */
-.watchlist-item {
-  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background 0.18s ease;
-  cursor: default;
+.budget-item__swatch {
+  transition:
+    transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.25s ease;
 }
+
+.budget-item--rich:hover .budget-item__swatch {
+  transform: scale(1.35);
+  box-shadow: 0 0 0 5px rgba(184, 148, 74, 0.08);
+}
+
+
+/* =========================================================
+   WATCHLIST ITEMS
+   ========================================================= */
+
+.watchlist-item {
+  border-radius: var(--radius-sm);
+  transition:
+    transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.22s ease,
+    border-color 0.22s ease,
+    background 0.22s ease;
+}
+
 .watchlist-item:hover {
-  transform: translateX(3px);
+  transform: translateX(5px);
   border-color: var(--brass);
   background: var(--brass-tint);
-  box-shadow: 0 3px 10px rgba(22, 36, 28, 0.06);
+  box-shadow:
+    0 4px 12px rgba(22, 36, 28, 0.06),
+    -3px 0 0 var(--brass);
 }
+
+.watchlist-item__dot {
+  transition:
+    transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.25s ease;
+}
+
 .watchlist-item:hover .watchlist-item__dot {
-  transform: scale(1.4);
+  transform: scale(1.45);
+  box-shadow: 0 0 0 5px rgba(184, 148, 74, 0.1);
 }
 
-/* ---------- Budget hero (gauge card) ---------- */
+
+/* =========================================================
+   BUDGET HERO / GAUGE
+   ========================================================= */
+
 .budget-hero {
-  transition: box-shadow 0.2s ease;
-}
-.budget-hero:hover {
-  box-shadow: 0 8px 20px rgba(22, 36, 28, 0.09), 0 20px 40px rgba(22, 36, 28, 0.12);
+  position: relative;
+  transition:
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.3s ease;
 }
 
-/* ---------- Recent transaction rows ---------- */
+.budget-hero:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 10px 24px rgba(22, 36, 28, 0.09),
+    0 24px 44px rgba(22, 36, 28, 0.12);
+}
+
+
+/* =========================================================
+   RECENT TRANSACTION ROWS
+   ========================================================= */
+
 .recent-item {
   border-radius: var(--radius-sm);
-  transition: background 0.15s ease, padding 0.15s ease, margin 0.15s ease;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    padding 0.2s ease,
+    margin 0.2s ease;
 }
+
 .recent-item:hover {
   background: var(--paper);
+  transform: translateX(4px);
   margin: 0 -10px;
   padding: 12px 10px;
 }
 
-/* ---------- Source breakdown rows (Income page) ---------- */
+
+/* =========================================================
+   SOURCE BREAKDOWN
+   ========================================================= */
+
 .source-item {
   border-radius: var(--radius-sm);
-  transition: background 0.15s ease, transform 0.15s ease;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
+
 .source-item:hover {
   background: var(--paper);
-  transform: translateX(2px);
+  transform: translateX(4px);
+  box-shadow: 3px 0 0 var(--brass);
 }
 
-/* ---------- Auth card ---------- */
+
+/* =========================================================
+   AUTH CARD
+   ========================================================= */
+
 .auth-card {
-  transition: box-shadow 0.2s ease;
-}
-.auth-card:hover {
-  box-shadow: 0 10px 24px rgba(22, 36, 28, 0.1), 0 24px 48px rgba(22, 36, 28, 0.12);
+  transition:
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.3s ease;
 }
 
-/* ---------- Hero banners (Overview / Income greeting) ---------- */
+.auth-card:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 12px 28px rgba(22, 36, 28, 0.1),
+    0 26px 50px rgba(22, 36, 28, 0.12);
+}
+
+
+/* =========================================================
+   HERO BANNERS
+   ========================================================= */
+
 .overview-hero,
 .income-hero,
 .settings-hero {
-  transition: box-shadow 0.25s ease;
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.3s ease;
 }
+
+.overview-hero::before,
+.income-hero::before,
+.settings-hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    100deg,
+    transparent,
+    rgba(255, 255, 255, 0.08),
+    transparent
+  );
+  transform: skewX(-15deg);
+  transition: left 0.8s ease;
+  pointer-events: none;
+}
+
 .overview-hero:hover,
 .income-hero:hover,
 .settings-hero:hover {
-  box-shadow: 0 10px 24px rgba(22, 36, 28, 0.14), 0 26px 48px rgba(22, 36, 28, 0.16);
+  transform: translateY(-3px);
+  box-shadow:
+    0 10px 24px rgba(22, 36, 28, 0.14),
+    0 26px 48px rgba(22, 36, 28, 0.16);
 }
 
-/* ---------- Chart cards specifically (slightly gentler, since they contain charts) ---------- */
+.overview-hero:hover::before,
+.income-hero:hover::before,
+.settings-hero:hover::before {
+  left: 140%;
+}
+
+
+/* =========================================================
+   CHART CARDS
+   ========================================================= */
+
+.chart-card {
+  transition:
+    transform 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.28s ease,
+    border-color 0.28s ease;
+}
+
 .chart-card:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px);
+  box-shadow:
+    0 8px 20px rgba(22, 36, 28, 0.07),
+    0 18px 34px rgba(22, 36, 28, 0.09);
 }
 
-/* ---------- Dark theme: switch shadows to darker, higher-contrast versions ---------- */
+
+/* =========================================================
+   BUTTON MICRO INTERACTION
+   ========================================================= */
+
+button,
+.btn {
+  transition:
+    transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+button:hover,
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+button:active,
+.btn:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+
+/* =========================================================
+   ICON MICRO INTERACTIONS
+   ========================================================= */
+
+.card svg,
+.summary-card svg,
+.quickstat svg,
+.budget-item--rich svg {
+  transition:
+    transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card:hover > svg,
+.summary-card:hover svg,
+.quickstat:hover svg {
+  transform: scale(1.06);
+}
+
+
+/* =========================================================
+   FOCUS STATES
+   ========================================================= */
+
+.card:focus-within,
+.settings-section:focus-within,
+.summary-card:focus-within,
+.quickstat:focus-within {
+  border-color: var(--brass);
+  box-shadow:
+    0 0 0 3px rgba(184, 148, 74, 0.12),
+    0 8px 20px rgba(22, 36, 28, 0.08);
+}
+
+
+/* =========================================================
+   DARK THEME
+   ========================================================= */
+
 :root[data-theme="dark"] .card:hover,
 :root[data-theme="dark"] .settings-section:hover,
 :root[data-theme="dark"] .summary-card:hover,
 :root[data-theme="dark"] .quickstat:hover,
-:root[data-theme="dark"] .budget-item--rich:hover {
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35), 0 20px 40px rgba(0, 0, 0, 0.4);
+:root[data-theme="dark"] .budget-item--rich:hover,
+:root[data-theme="dark"] .chart-card:hover {
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.35),
+    0 22px 44px rgba(0, 0, 0, 0.42);
+}
+
+
+/* =========================================================
+   ENTRY ANIMATION
+   ========================================================= */
+
+@keyframes cardReveal {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card,
+.summary-card,
+.quickstat,
+.budget-item--rich,
+.chart-card {
+  animation: cardReveal 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+
+/* =========================================================
+   REDUCED MOTION ACCESSIBILITY
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .settings-section,
+  .watchlist-card,
+  .summary-card,
+  .quickstat,
+  .budget-item--rich,
+  .watchlist-item,
+  .budget-hero,
+  .recent-item,
+  .source-item,
+  .auth-card,
+  .overview-hero,
+  .income-hero,
+  .settings-hero,
+  .chart-card,
+  button,
+  .btn {
+    transition: none;
+    animation: none;
+    transform: none;
+  }
+
+  .card::before,
+  .quickstat::before,
+  .budget-item--rich::before,
+  .overview-hero::before,
+  .income-hero::before,
+  .settings-hero::before {
+    display: none;
+  }
 }

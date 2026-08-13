@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import {
   LuArrowUpRight, LuArrowDownRight, LuWallet, LuPercent, LuFlame,
-  LuReceipt, LuCrown, LuCalendarDays, LuChevronRight, LuSparkles,
+  LuReceipt, LuCrown, LuCalendarDays, LuChevronRight, LuSparkles, LuTarget,
 } from "react-icons/lu";
 import { CATEGORIES } from "../data/dummyData";
 import { useAuth } from "../context/AuthContext";
@@ -9,6 +9,7 @@ import { useSettings } from "../context/SettingsContext";
 import { formatCurrency, formatDate, monthKey } from "../utils/helpers";
 import CategoryPie from "./CategoryPie";
 import TrendChart from "./TrendChart";
+import IncomeVsExpenseChart from "./IncomeVsExpenseChart";
 import RecentList from "./RecentList";
 import "./Overview.css";
 
@@ -71,15 +72,21 @@ export default function Overview({ expenses, onEdit, onDelete, onNavigate }) {
     const monthExpenses = expenses.filter((e) => e.type === "expense" && monthKey(e.date) === thisMonth);
     const totals = {};
     monthExpenses.forEach((e) => { totals[e.category] = (totals[e.category] || 0) + e.amount; });
-    return CATEGORIES.map((c) => {
+    const rows = CATEGORIES.map((c) => {
       const limit = settings.budgets?.[c.id] || 0;
       const spent = totals[c.id] || 0;
       const pct = limit > 0 ? Math.round((spent / limit) * 100) : 0;
       return { ...c, limit, spent, pct };
-    })
-      .filter((c) => c.limit > 0)
-      .sort((a, b) => b.pct - a.pct)
-      .slice(0, 4);
+    }).filter((c) => c.limit > 0);
+
+    const overallLimit = rows.reduce((s, c) => s + c.limit, 0);
+    const overallSpent = rows.reduce((s, c) => s + c.spent, 0);
+    const overallPct = overallLimit > 0 ? Math.min(100, Math.round((overallSpent / overallLimit) * 100)) : 0;
+    const overCount = rows.filter((c) => c.pct >= 100).length;
+
+    const top = [...rows].sort((a, b) => b.pct - a.pct).slice(0, 4);
+
+    return { top, overallLimit, overallSpent, overallPct, overCount, totalCategories: rows.length };
   }, [expenses, settings.budgets, thisMonth]);
 
   const monthLabel = today.toLocaleDateString("en-IN", { month: "long", year: "numeric" });
@@ -187,17 +194,50 @@ export default function Overview({ expenses, onEdit, onDelete, onNavigate }) {
         </div>
       </section>
 
-      {/* Budget snapshot */}
-      {budgetSnapshot.length > 0 && (
+      {/* Income vs Expenses */}
+      <section className="card">
+        <h3 className="card__title">Income vs Expenses</h3>
+        <IncomeVsExpenseChart expenses={expenses} />
+      </section>
+
+      {/* Budget overview */}
+      {budgetSnapshot.top.length > 0 && (
         <section className="card">
           <div className="card__title-row">
-            <h3 className="card__title">Budget snapshot</h3>
+            <h3 className="card__title">Budget overview</h3>
             <button className="card__link" onClick={() => onNavigate?.("budgets")}>
               View budgets <LuChevronRight size={14} />
             </button>
           </div>
+
+          <div className="budget-overview-strip">
+            <div className="budget-overview-strip__gauge">
+              <span className="budget-overview-strip__pct figure">{budgetSnapshot.overallPct}%</span>
+              <span className="budget-overview-strip__label">used overall</span>
+            </div>
+            <div className="budget-overview-strip__figures">
+              <div>
+                <p className="budget-overview-strip__figure-label">Budgeted</p>
+                <p className="figure">{formatCurrency(budgetSnapshot.overallLimit)}</p>
+              </div>
+              <div>
+                <p className="budget-overview-strip__figure-label">Spent</p>
+                <p className="figure">{formatCurrency(budgetSnapshot.overallSpent)}</p>
+              </div>
+              <div>
+                <p className="budget-overview-strip__figure-label">Categories tracked</p>
+                <p className="figure">{budgetSnapshot.totalCategories}</p>
+              </div>
+              {budgetSnapshot.overCount > 0 && (
+                <span className="chip chip--coral">
+                  <LuTarget size={13} /> {budgetSnapshot.overCount} over budget
+                </span>
+              )}
+            </div>
+          </div>
+
           <div className="budget-snapshot">
-            {budgetSnapshot.map((c) => (
+            {budgetSnapshot.top.map((c) => (
               <div className="budget-snapshot__item" key={c.id}>
                 <div className="budget-snapshot__head">
                   <span className="budget-snapshot__name">{c.label}</span>
