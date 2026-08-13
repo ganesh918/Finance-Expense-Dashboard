@@ -533,3 +533,30 @@ button:active,
     display: none;
   }
 }
+
+
+
+
+/* =========================================================
+   LIGHT SIDEBAR
+   ========================================================= */
+
+.sidebar {
+  background: #f8f7f3;
+  color: #1f2a24;
+  border-right: 1px solid #e5e1d8;
+}
+
+.sidebar a {
+  color: #4a514c;
+}
+
+.sidebar a:hover {
+  background: #eeece5;
+  color: #1f2a24;
+}
+
+.sidebar .active {
+  background: #e8e3d5;
+  color: #1f2a24;
+}
