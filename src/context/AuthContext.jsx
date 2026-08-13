@@ -1,33 +1,15 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
-/*
- * Mock authentication only — there is no backend in this project (per spec,
- * dummy/static data only, no API integration). Accounts and sessions are
- * kept in localStorage purely so a page refresh doesn't log you out during
- * a demo. Passwords are stored in plain text here for simplicity; never do
- * this in a real application — use a real auth provider or hashed
- * passwords on a real server instead.
- */
 
 const AuthContext = createContext(null);
 const USERS_KEY = "ledger_users";
 const SESSION_KEY = "ledger_session";
 
-const seedUsers = () => {
-  const existing = localStorage.getItem(USERS_KEY);
-  if (existing) return JSON.parse(existing);
-  const seeded = [
-    { id: "u1", name: "Demo User", email: "demo@ledger.com", password: "demo1234" },
-  ];
-  localStorage.setItem(USERS_KEY, JSON.stringify(seeded));
-  return seeded;
-};
-
 const getUsers = () => {
   try {
-    return JSON.parse(localStorage.getItem(USERS_KEY)) || seedUsers();
+    return JSON.parse(localStorage.getItem(USERS_KEY)) || [];
   } catch {
-    return seedUsers();
+    return [];
   }
 };
 
@@ -38,7 +20,6 @@ export function AuthProvider({ children }) {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    seedUsers();
     try {
       const sessionEmail = localStorage.getItem(SESSION_KEY);
       if (sessionEmail) {
@@ -50,7 +31,7 @@ export function AuthProvider({ children }) {
     }
   }, []);
 
- const login = ({ email, password }) => {
+  const login = ({ email, password }) => {
     const cleanEmail = email.trim().toLowerCase();
     const users = getUsers();
     const existing = users.find((u) => u.email.toLowerCase() === cleanEmail);

@@ -65,12 +65,6 @@ export default function AuthPage() {
     notify(isSignup ? `Welcome, ${form.name.split(" ")[0]}!` : "Welcome back!", "success");
   };
 
-  const fillDemo = () => {
-    setMode("login");
-    setForm({ ...emptyForm, email: "demo@ledger.com", password: "demo1234" });
-    setErrors({});
-  };
-
   return (
     <div className="auth-page">
       <div className="auth-card">
@@ -172,13 +166,6 @@ export default function AuthPage() {
             {submitting ? "Please wait…" : isSignup ? "Create account" : "Log in"}
           </button>
         </form>
-
-        <div className="auth-card__demo">
-          <span>Just exploring?</span>
-          <button type="button" className="auth-card__demo-link" onClick={fillDemo}>
-            Use demo credentials
-          </button>
-        </div>
       </div>
     </div>
   );
