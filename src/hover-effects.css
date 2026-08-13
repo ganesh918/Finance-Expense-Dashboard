@@ -1,0 +1,217 @@
+/* ---------- Cards ---------- */
+.card:hover {
+  border-color: var(--line-strong);
+}
+
+.summary-card:hover .summary-card__icon {
+  transform: scale(1.08);
+}
+.summary-card__icon {
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.quickstat:hover .quickstat__icon,
+.quickstat:hover .quickstat__icon--mint {
+  transform: scale(1.08) rotate(-4deg);
+}
+.quickstat__icon {
+  transition: transform 0.2s ease;
+}
+
+.watchlist-item:hover,
+.budget-item--rich:hover {
+  border-color: var(--line-strong);
+  background: var(--paper-raised);
+}
+
+.settings-section:hover .settings-section__icon {
+  background: var(--brass-tint);
+  color: var(--brass);
+}
+
+/* ---------- Buttons ---------- */
+.btn--primary:hover {
+  background: var(--pine-light);
+  transform: translateY(-1px);
+}
+
+.btn--ghost:hover {
+  background: var(--paper);
+  border-color: var(--ink-faint);
+  color: var(--ink);
+}
+
+.btn--danger:hover {
+  background: #9c372f;
+  transform: translateY(-1px);
+}
+
+.card__link:hover {
+  gap: 6px;
+  color: var(--pine-light);
+}
+
+.auth-card__demo-link:hover {
+  text-decoration-thickness: 2px;
+}
+
+/* ---------- Sidebar ---------- */
+.sidebar__link:hover:not(.sidebar__link--active) {
+  background: rgba(239, 233, 218, 0.1);
+  padding-left: 16px;
+}
+
+.sidebar__logout:hover {
+  transform: rotate(-8deg);
+}
+
+.sidebar__user-main:hover .sidebar__avatar {
+  transform: scale(1.06);
+}
+.sidebar__avatar {
+  transition: transform 0.15s ease;
+}
+
+/* ---------- Topbar ---------- */
+.topbar__theme-toggle:hover {
+  transform: rotate(15deg) scale(1.05);
+}
+
+.topbar__menu:hover {
+  background: var(--paper);
+  border-color: var(--line-strong);
+}
+
+/* ---------- Table rows & row actions ---------- */
+.table tbody tr:hover {
+  background: var(--paper);
+}
+.table tbody tr:hover .table__date,
+.table tbody tr:hover td:first-child {
+  color: var(--pine);
+}
+
+.row-actions button:hover,
+.recent-item__actions button:hover {
+  background: var(--pine-tint);
+  color: var(--pine);
+}
+.row-actions button:hover[aria-label="Delete entry"],
+.recent-item__actions button:hover[aria-label="Delete entry"] {
+  background: var(--coral-tint);
+  color: var(--coral);
+}
+
+.recent-item:hover {
+  background: var(--paper);
+  margin: 0 -12px;
+  padding: 12px;
+  border-radius: var(--radius-sm);
+}
+
+/* ---------- Tags & badges ---------- */
+.tag {
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+.tag:hover {
+  filter: brightness(0.94);
+}
+
+.badge {
+  transition: transform 0.15s ease;
+}
+.badge:hover {
+  transform: scale(1.05);
+}
+
+.chip {
+  transition: transform 0.15s ease;
+}
+.chip:hover {
+  transform: translateY(-1px);
+}
+
+/* ---------- Inputs ---------- */
+.input,
+.search-box {
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.input:hover,
+.search-box:hover {
+  border-color: var(--line-strong);
+}
+.input:focus,
+.search-box:focus-within {
+  border-color: var(--pine);
+  box-shadow: 0 0 0 3px var(--pine-tint);
+  outline: none;
+}
+
+/* ---------- Segmented control ---------- */
+.segmented__btn:hover:not(.segmented__btn--active) {
+  color: var(--ink);
+  background: rgba(0, 0, 0, 0.03);
+}
+
+/* ---------- Toggle switch ---------- */
+.toggle-switch:hover {
+  filter: brightness(1.08);
+}
+
+/* ---------- Theme swatches ---------- */
+.theme-swatch:hover {
+  border-color: var(--ink-faint);
+}
+.theme-swatch:hover .theme-swatch__preview {
+  transform: scale(1.03);
+}
+.theme-swatch__preview {
+  transition: transform 0.15s ease;
+}
+
+/* ---------- Bottom nav ---------- */
+.bottom-nav__item:hover {
+  color: var(--pine);
+}
+
+/* ---------- Password visibility toggle ---------- */
+.password-input__toggle:hover {
+  background: var(--paper);
+}
+
+/* ---------- Budget edit row save button ---------- */
+.budget-edit-row__save:hover {
+  border-color: var(--pine);
+  color: var(--pine);
+}
+
+/* ---------- Jump rail (settings) ---------- */
+.settings-jumprail__item:hover {
+  transform: translateY(-1px);
+}
+
+/* ---------- Close buttons ---------- */
+.modal__close:hover,
+.toast__close:hover {
+  background: var(--paper);
+  border-radius: 6px;
+  color: var(--ink);
+}
+
+/* ---------- Links inside forms ---------- */
+.field:hover .field__label {
+  color: var(--ink);
+}
+
+/* ---------- Category swatches ---------- */
+.budget-item__swatch,
+.source-item__dot,
+.recent-item__dot,
+.watchlist-item__dot {
+  transition: transform 0.15s ease;
+}
+.budget-item--rich:hover .budget-item__swatch,
+.source-item:hover .source-item__dot,
+.watchlist-item:hover .watchlist-item__dot {
+  transform: scale(1.3);
+}

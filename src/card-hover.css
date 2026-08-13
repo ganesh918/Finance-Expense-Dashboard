@@ -1,0 +1,145 @@
+/* ---------- Base card lift (main .card, chart cards, settings sections) ---------- */
+.card,
+.settings-section,
+.watchlist-card {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.2s ease,
+              border-color 0.2s ease;
+}
+.card:hover,
+.settings-section:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(22, 36, 28, 0.07), 0 18px 34px rgba(22, 36, 28, 0.1);
+  border-color: var(--line-strong);
+}
+
+/* ---------- Summary cards (Overview / Income / Expenses stat tiles) ---------- */
+.summary-card {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.2s ease,
+              border-left-width 0.15s ease;
+  cursor: default;
+}
+.summary-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 18px rgba(22, 36, 28, 0.08), 0 20px 36px rgba(22, 36, 28, 0.1);
+  border-left-width: 6px;
+}
+.summary-card:hover .summary-card__icon {
+  transform: scale(1.1);
+}
+.summary-card__icon {
+  transition: transform 0.2s ease;
+}
+
+/* ---------- Quick stat chips ---------- */
+.quickstat {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, border-color 0.2s ease;
+  cursor: default;
+}
+.quickstat:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(22, 36, 28, 0.07), 0 16px 28px rgba(22, 36, 28, 0.09);
+  border-color: var(--brass);
+}
+.quickstat:hover .quickstat__icon {
+  transform: scale(1.1) rotate(-4deg);
+}
+.quickstat__icon {
+  transition: transform 0.2s ease;
+}
+
+/* ---------- Rich budget cards ---------- */
+.budget-item--rich {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, border-color 0.2s ease;
+  cursor: default;
+}
+.budget-item--rich:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(22, 36, 28, 0.08), 0 16px 30px rgba(22, 36, 28, 0.1);
+  border-color: var(--line-strong);
+}
+.budget-item--rich:hover .budget-item__swatch {
+  transform: scale(1.4);
+}
+.budget-item__swatch {
+  transition: transform 0.15s ease;
+}
+
+/* ---------- Watchlist items ---------- */
+.watchlist-item {
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+  cursor: default;
+}
+.watchlist-item:hover {
+  transform: translateX(3px);
+  border-color: var(--brass);
+  background: var(--brass-tint);
+  box-shadow: 0 3px 10px rgba(22, 36, 28, 0.06);
+}
+.watchlist-item:hover .watchlist-item__dot {
+  transform: scale(1.4);
+}
+
+/* ---------- Budget hero (gauge card) ---------- */
+.budget-hero {
+  transition: box-shadow 0.2s ease;
+}
+.budget-hero:hover {
+  box-shadow: 0 8px 20px rgba(22, 36, 28, 0.09), 0 20px 40px rgba(22, 36, 28, 0.12);
+}
+
+/* ---------- Recent transaction rows ---------- */
+.recent-item {
+  border-radius: var(--radius-sm);
+  transition: background 0.15s ease, padding 0.15s ease, margin 0.15s ease;
+}
+.recent-item:hover {
+  background: var(--paper);
+  margin: 0 -10px;
+  padding: 12px 10px;
+}
+
+/* ---------- Source breakdown rows (Income page) ---------- */
+.source-item {
+  border-radius: var(--radius-sm);
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+.source-item:hover {
+  background: var(--paper);
+  transform: translateX(2px);
+}
+
+/* ---------- Auth card ---------- */
+.auth-card {
+  transition: box-shadow 0.2s ease;
+}
+.auth-card:hover {
+  box-shadow: 0 10px 24px rgba(22, 36, 28, 0.1), 0 24px 48px rgba(22, 36, 28, 0.12);
+}
+
+/* ---------- Hero banners (Overview / Income greeting) ---------- */
+.overview-hero,
+.income-hero,
+.settings-hero {
+  transition: box-shadow 0.25s ease;
+}
+.overview-hero:hover,
+.income-hero:hover,
+.settings-hero:hover {
+  box-shadow: 0 10px 24px rgba(22, 36, 28, 0.14), 0 26px 48px rgba(22, 36, 28, 0.16);
+}
+
+/* ---------- Chart cards specifically (slightly gentler, since they contain charts) ---------- */
+.chart-card:hover {
+  transform: translateY(-2px);
+}
+
+/* ---------- Dark theme: switch shadows to darker, higher-contrast versions ---------- */
+:root[data-theme="dark"] .card:hover,
+:root[data-theme="dark"] .settings-section:hover,
+:root[data-theme="dark"] .summary-card:hover,
+:root[data-theme="dark"] .quickstat:hover,
+:root[data-theme="dark"] .budget-item--rich:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35), 0 20px 40px rgba(0, 0, 0, 0.4);
+}
